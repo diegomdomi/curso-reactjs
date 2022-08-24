@@ -1,0 +1,17 @@
+.div1{
+    width: 400px;
+    height: 400px;
+    margin-left: 450px;
+    text-align: center;
+    border: 1px solid;
+    transition: 0.3s;
+}
+
+
+.div2{
+    width: 80px;
+    height: 80px;
+    margin: 150px;
+    text-align: center;
+    border: 1px solid;
+}
