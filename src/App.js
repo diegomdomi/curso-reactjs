@@ -1,15 +1,40 @@
 import './App.css';
-// import Bitcoin from './Components/Bitcoin';
-// import ComponenteEventos from './Components/ComponenteEventos';
-// import MouseColor from './Components/MouseColor';
-import LogginOut from './Views/LogginOut'
+import { BrowserRouter as Router, Switch ,Route, Redirect } from "react-router-dom";
+import Mensajes from './Components/Mensajes'
+import LoginPage from './Components/LoginPage';
+import {connect} from 'react-redux';
 
-function App() {
+function App({userLogged}) {
   return (
     <div className="App">
-      <LogginOut></LogginOut>
+    
+    <Router>
+      <Switch>
+      	
+            <Route exact path="/" component={ LoginPage }/>
+            <Route path="/mensajes" >
+              {
+                userLogged.length ?
+                <Mensajes />
+                :
+                ()=>{
+                  alert("must be logged in")
+                return (<Redirect to="/"/>)
+                }
+              }
+            </Route>        
+      </Switch>
+    </Router>
     </div>
   );
-}
+  }
 
-export default App;
+
+  const mapStateToProps = state => { 
+    return{
+       userLogged: state.userLogged
+    }
+  };
+
+  export default connect(mapStateToProps)(App)
+

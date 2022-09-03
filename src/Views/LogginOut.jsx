@@ -1,7 +1,7 @@
 import React from 'react'
 import{ logginUser } from '../redux/actions/logginAction'
 import { useSelector,useDispatch } from 'react-redux'
-import Mensajes from './Mensajes'
+import Mensajes from '../Components/Mensajes'
 
 const LogginOut = () => {
     const ingresar = useSelector(state=>state.isLoggin);

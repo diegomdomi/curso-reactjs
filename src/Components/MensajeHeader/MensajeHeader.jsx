@@ -1,7 +1,9 @@
 import React, {  useState } from 'react';
 import './MensajeHeader.css'
+// import StateUser from '../StateUser';
 
 const  MensajeHeader = (props) => {
+    console.log(props.params.pathname);
     const [asunto, setAsunto] = useState('');
     const [email, setEmail] = useState('');
     const [nota, setNota] = useState('');
@@ -9,6 +11,8 @@ const  MensajeHeader = (props) => {
     const [validacionAsunto , setValidacionAsunto] = useState(false);
     const [validacionEmail , setValidacionEmail] = useState(false);
     const [validacionNota , setValidacionNota] = useState(false);
+
+    
 
     let manejarCambios = (event) => {
         if(event.target.name === "asunto"){
@@ -65,10 +69,10 @@ const  MensajeHeader = (props) => {
         console.log("se envió form")
     }
 
-
-return (
+    return (
     <div>
     <h1>Agregar Notas Rápidas</h1>
+    <h4>{props.params.state.online ? "Online User" : "Offline User"}</h4>
     <form onSubmit={enviarForm}>
         <input className="Elemento" placeholder="asunto" type="text"
            name="asunto" onChange={manejarCambios}  required minlength="2"/>

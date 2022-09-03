@@ -1,11 +1,13 @@
 import React from 'react'
 import { useSelector,useDispatch } from 'react-redux'
 import { borrarMensaje, crearMensaje, leerMensaje, vaciarMensajes } from '../redux/actions/index'
-import MensajeHeader from '../Components/MensajeHeader/MensajeHeader'
-import MensajeTable from '../Components/MensajeTable/MensajeTable'
-// import { useState } from 'react';
+import MensajeHeader from './MensajeHeader/MensajeHeader'
+import MensajeTable from './MensajeTable/MensajeTable'
+import { useLocation } from 'react-router-dom';
 
 const  Mensajes =()=> {
+  const location = useLocation()
+  console.log(location)
 
     // const[mensajes,setMensajes] = useState([])
     const mensajes = useSelector(state=>state.mensajes);
@@ -42,6 +44,7 @@ const  Mensajes =()=> {
     <div className="Mensajes">
         <MensajeHeader clickNuevo={crear} 
                        clickEliminar={vaciar}
+                       params={location}
                        >
         </MensajeHeader>
         <MensajeTable mensajes={mensajes} 

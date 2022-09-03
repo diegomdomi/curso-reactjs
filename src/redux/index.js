@@ -2,11 +2,13 @@
 import { createStore, combineReducers } from 'redux';
 import  mensajes  from './reducers';
 import isLoggin from './reducers/logginReducer'
+import userLogged  from './reducers/userLoggedReducer'
 
 
 const rootReducers = combineReducers({
   mensajes:mensajes,
-  isLoggin:isLoggin
+  isLoggin:isLoggin,
+  userLogged :userLogged
 })
 
 export const createAppStore = () => {
