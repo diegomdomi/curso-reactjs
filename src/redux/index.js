@@ -1,14 +1,17 @@
 	
-import { createStore, combineReducers } from 'redux';
-import  mensajes  from './reducers';
-import isLoggin from './reducers/logginReducer'
-import userLogged  from './reducers/userLoggedReducer'
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import createSagaMiddleware from 'redux-saga';
+// import  mensajes  from './reducers';
+// import isLoggin from './reducers/logginReducer'
+// import userLogged  from './reducers/userLoggedReducer'
+import products  from './reducers/productsReducer'
 
 
 const rootReducers = combineReducers({
-  mensajes:mensajes,
-  isLoggin:isLoggin,
-  userLogged :userLogged
+  // mensajes:mensajes,
+  // isLoggin:isLoggin,
+  // userLogged :userLogged,
+  products:products
 })
 
 export const createAppStore = () => {

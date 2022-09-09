@@ -1,17 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import App from './App';
+// import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux'
 import createAppStore from './redux';
+import AppAxios from './AppAxios';
 let appStore = createAppStore();
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <Provider store={appStore} >
     <React.StrictMode>
-     <App />
+     {/* <App /> */}
+     <AppAxios/>
     </React.StrictMode>
   </Provider>,
 );
