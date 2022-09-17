@@ -1,11 +1,5 @@
  export const LOGEDIN_STORE = "LOGEDIN_STORE";
 
-//   export  const inicialState = {
-//          email:"",
-//          password:"",
-//          isLogged: false
-
-//     }
 
    export const myReducer = (state,action)=>{
         switch (action.type) {

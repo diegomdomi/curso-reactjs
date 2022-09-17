@@ -57,7 +57,7 @@ const LoginPage = () => {
             "email":registroEmail,
             "password": registroPassword
         }
-
+     
         if(localStorage){
             let storage;
             if (!localStorage['storage']) storage = [];
@@ -72,9 +72,9 @@ const LoginPage = () => {
 
             localStorage.setItem('storage', JSON.stringify(storage));
         }
-        
-
+      
     }
+    console.log(registroPassword)
 
     
     const user =(e)=>{

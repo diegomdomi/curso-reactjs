@@ -2,6 +2,7 @@
     background-color:#e1f5fe;
 }
 
+
 nav{
     background-color:#29b6f6!important
 }
@@ -18,14 +19,15 @@ nav{
  
   
 .card .card-image img {
-    padding: 10px;
+    padding: 20px;
 }
+
 
 .card .card-content .card-title {
     font-size:15px;
-    font-weight:500;
-    line-height:20px;
+    font-weight:600;
     color: black;
+    line-height: 17px!important
 }
 
 .card-content p {
@@ -36,7 +38,7 @@ nav{
 }
 
 .product{
-    margin:20px;
+    padding-left:20px;
 }
 
 .product-price strong{

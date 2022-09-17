@@ -1,46 +1,40 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, {useState} from 'react'
 import './store.css'
+import Product from './Product'
 
-const Store = ({id,title,price,description,rating,img,category}) => {
+const Store = ({products}) => {
 
-  let abrirProducto = () => {
- 
-    return {
-      pathname: '/product/' + id,
-      state: { 
-          id,
-          img,
-          description,
-          title,
-          price,
-          category
-      }
-    }  
-  }
+console.log("soy Store");
+const [currency, setcurrency] = useState(false)
+
+const cambiar=()=>{
+  setcurrency(!currency)
+}
+console.log(currency)
+
   return (
-    <>
+   <>
+    <button  onClick={cambiar}>{currency ? "u$s" : "€"}</button>
+    <div className="container">
+      <div className="row">
+       {products.map((item, index) => {
+          return( <Product  title={item.title}
+                            price= {item.price}       
+                            description={item.description}
+                            rating={item.rating.rate}
+                            img={item.image}
+                            category={item.category}
+                            id={item.id}
+                            key={index}/>
+             )
+        })}
+      </div>
+    </div> 
+    </>
 
-   
-<div className="col s12 m3">
-      <div className="card">
-        <div className="card medium">
-        <Link to={abrirProducto}>
-        <div className="card-image">
-          <img src={img} alt={description} />
-        </div>
-        </Link>
-        <div className="card-content">
-          <span className="card-title">{title}</span>
-          <p>u$s {price}</p>
-          <p>ratin {rating}</p>
-        </div>
-      </div>
-      </div>
-    </div>
-  </>
   )
 }
+
 
 export default Store
 

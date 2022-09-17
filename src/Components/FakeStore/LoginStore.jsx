@@ -10,13 +10,14 @@ const LoginStore = () => {
     const navigateTo = (path) => {
         history.push(path);
     }
-
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [cliente, setCliente] = useState(true)
     const [registroEmail, setregistroEmail] = useState("")
     const [registroPassword, setregistroPassword] = useState("")
     const [validacionPass, setValidacionPass] = useState(false)
+    const [validacionEmail, setValidacionEmail] = useState(false)
+
 
     const handleInputChange = (e) => {
         if(e.target.name === "email"){
@@ -26,11 +27,12 @@ const LoginStore = () => {
         if(e.target.name === "password"){
             const pass = e.target.value
             setPassword(pass)
-            comprobarPass(pass)
+            // comprobarPass(pass)
         }
         if(e.target.name === "nuevoEmail"){
             const nuevoEmail = e.target.value
             setregistroEmail(nuevoEmail)
+
         }
         if(e.target.name === "nuevoPassword"){
             const nuevoPassword = e.target.value
@@ -53,17 +55,19 @@ const LoginStore = () => {
             if (!localStorage['storage']) storage = [];
             else storage = JSON.parse(localStorage['storage']);
             if (!(storage instanceof Array)) storage = [];
-            if(storage.find(user=>user.email === registroEmail)){
+            if((storage.find(user=>user.email === registroEmail))||(userLogin.password.length<5)){
                 setCliente(false)
+                alert("unavailable user")
+            } else if(!userLogin.email){
+                setValidacionEmail(false)
             }else{
                 setCliente(true)
                 storage.push(userLogin);
             }
-
+            
             localStorage.setItem('storage', JSON.stringify(storage));
+            
         }
-        
-
     }
 
     
@@ -72,7 +76,6 @@ const LoginStore = () => {
 
         const getUsers= JSON.parse(localStorage.getItem('storage'))
         const mapeoEmail = getUsers.find(user => user.email === email)
-
         let usuarioLoged =
         {
             "email":email,
@@ -80,68 +83,80 @@ const LoginStore = () => {
         }
         if( mapeoEmail ){
 
-            if( usuarioLoged.email === mapeoEmail.email && usuarioLoged.password === mapeoEmail.password 
+            if(usuarioLoged.email === mapeoEmail.email && usuarioLoged.password === mapeoEmail.password 
                 && usuarioLoged.email !=="" && usuarioLoged.password !== ""){
                     context.addUsers({email:usuarioLoged.email, password:usuarioLoged.password})
                     navigateTo( "/store" )
-
-            }else{
+                }else{
                 alert("user or password incorrect")
             }
         }else{
             alert("user does not exist, please create an Account")
         }
+     
     }
 
         const comprobarPass = (value) => {
-            if(value.length >= 5){
+            if(value.length >= 5 && value.length !== null ){
                 setValidacionPass(true)
             }else{
                 setValidacionPass(false)
             }
         }    
-       
+
+ 
 return(
    
     <>
-    <div className="body-login">
-    <h3 className="title-login">User Login</h3>
+        <div className="body-login">
+        <h4 className="title-login">User Login</h4>
+        <div className="loggin_page">
+            <form className="col s12">
+            <div className="row">
+            <div className="input-field col s4">
+                <input   name="email" type="email" className="validate" placeholder="your email..."
+                    onChange={handleInputChange}
+                />
+                <label className="active" for="email_inline">Email</label>
+                </div>
+                <div className="input-field col s4">
+                    <input  name="password" type="password" className="validate" placeholder="your password..."
+                    onChange={handleInputChange}
+                />
+                <label className="active" for="first_name2">Password</label>
+                </div>
+                <button  onClick={user} className="btn waves-effect waves-light" type="submit" name="action">Loggin</button>
+                </div>
+            </form>
+        </div> 
+
+
+
+    <h4 className="title-login">New Account</h4>
     <div className="loggin_page">
-        <form className="form-login">
-            <span>
-                <label htmlFor="fname">Email</label>
-                <input type="mail" name="email" placeholder="Your name.."
+            <form className="col s12">
+            <div className="row">
+            <div class="input-field col s4">
+                <input   name="nuevoEmail" type="email" class="validate" placeholder="your email..."
                     onChange={handleInputChange}
                 />
-            </span>
-            <span>
-                <label htmlFor="lname">Password</label>
-                <input type="password" name="password" placeholder="Your password.." required minLength="5"
+                <label class="active" for="email_inline">Email</label>
+
+                </div>
+            {(!cliente && registroEmail!=="")  &&<h5 style={{color:"red", fontSize:"16px"}}>the email is exists!</h5> } 
+            {((!validacionEmail || registroPassword==="") && !cliente) &&<h5 style={{color:"red", fontSize:"16px"}}>expected an email user!</h5> } 
+                <div class="input-field col s4">
+                <input  name="nuevoPassword" type="Password" class="validate" placeholder="your password..."
                     onChange={handleInputChange}
                 />
-            </span>
-            <input type="submit" value="Loggin" onClick={user} />
-        </form>
-    </div> 
+                <label class="active" for="first_name2">Password</label>
+                </div>
+                {!validacionPass && registroPassword.length >= 1 && <h5 style={{color:"red", fontSize:"16px"}}>Password must have more than 5 words</h5>}
+                <button  onClick={userRegister} class="btn waves-effect waves-light" type="submit" name="action">Loggin</button>
+                </div>
+            </form>
+        </div> 
 
-
-
-    <h3 className="title-login">New Account</h3>
-    <div>
-        <form className="form-login">
-            <label htmlFor="fname">Email</label>
-            <input type="mail" id="email" name="nuevoEmail" placeholder="Your email..."
-                onChange={handleInputChange}
-            />
-            {!cliente && <h5 style={{color:"red", fontSize:"16px"}}>the email is existed!</h5> } 
-            <label htmlFor="lname">Password</label>
-            <input type="password" id="password" name="nuevoPassword" placeholder="Your password..." required minLength="5"
-                onChange={handleInputChange}
-            />
-            {!validacionPass && registroPassword.length >= 1 && <h5 style={{color:"red", fontSize:"16px"}}>Password must have more than 5 words</h5>}
-            <input type="submit" value="Loggin" onClick={userRegister}/>
-        </form>
-    </div>
     </div>
     </>
     

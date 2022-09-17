@@ -1,39 +1,51 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
+import React,{ useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import './store.css'
-
-const Product = (products) => {
-
- let location  = useLocation()
-  const {id,img,description,title,price,category} = location.state
+const Product = ({id,title,price,description,rating,img,index,category}) => {
 
 
+  let abrirProducto = (id,img,title,description,price,category) => {
+ 
+    return {
+      pathname: '/product/'+ id,
+      state: { 
+          id,
+          img,
+          description,
+          title,
+          price,
+          category
+      }
+    }  
+  }
+
+  
+useEffect(() => {
+  console.log("soy producto");
+
+})
   return (
-    
-  <div className="row product">
-    <div className="col s12 m7">
-      <h5 className="category">{category}</h5>
-      <h4 className="header">{title}</h4>
-      <div className="card horizontal">
-        <div className="card-image">
-          <img src={img} style={{maxWidth:"250px"}} alt={{description}}/>
-        </div>
-        <div className="card-stacked">
-          <div className="card-content">
-            <p>{description}</p>
-          </div>
-          <div className="product-price"> 
-          <strong>u$s {price}</strong> 
-          </div>
-          <div className="card-action">
-            <a >Add to cart</a>
+    <>
+
+    <div className= "col s12 m3" key={index}>
+        <div className="card" >
+          <div className="card medium">
+            <Link to={()=>abrirProducto(id,img,title,description,price,category)} >
+              <div className="card-image"  >
+              <img src={img} alt={description} id={id} />
+              </div>
+            </Link>
+            <div className="card-content" >
+              <span className="card-title">{title}</span>
+              <p>u$s {price}</p>
+              <p>rating {rating}</p>
+            </div>
           </div>
         </div>
       </div>
-      </div>
-  </div>
+
+</>
   )
 }
 
-
-export default Product
+export default React.memo(Product);

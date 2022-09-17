@@ -1,14 +1,17 @@
-import {ACTIONS_PRODUCTS} from "../actions/listProducts"
+import {ACTIONS_PRODUCTS} from "../actions/productsList"
+import {LOAD_PRODUCTS} from '../actions/productsActions'
+
 
 const initialState = {
     products: [],
 }
-
 const products = (state= initialState.products,action) => {
     switch(action.type){
-        case ACTIONS_PRODUCTS.PRODUCTS:
-            state.push(action.payload);
-                return[...state];
+        case LOAD_PRODUCTS:
+            return[...state];       
+            case ACTIONS_PRODUCTS.PRODUCTS:
+           state.push(action.products);
+            return[...state];
             default:
                  return [...state];
     }
