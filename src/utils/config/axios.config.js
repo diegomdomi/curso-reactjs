@@ -1,8 +1,8 @@
-import axios from "axios";
+// import axios from "axios";
 
-export default axios.create( 
-    {
-        baseUrl : 'https://fakestoreapi.com/products',
-        responseType : 'json',
-    }
-)
+// export default axios.create( 
+//     {
+//         baseUrl : 'https://fakestoreapi.com/products',
+//         responseType : 'json',
+//     }
+// )
