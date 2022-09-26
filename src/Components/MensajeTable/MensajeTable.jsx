@@ -32,4 +32,4 @@ const MensajeTable = (props) => {
   )
 }
 
-export default MensajeTable
+export default MensajeTable;
