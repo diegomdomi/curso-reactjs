@@ -1,4 +1,4 @@
-import React,{ useEffect, useState } from 'react'
+import React,{ useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './store.css'
 const Product = ({id,title,price,description,rating,img,index,category}) => {
@@ -49,3 +49,4 @@ useEffect(() => {
 }
 
 export default React.memo(Product);
+// export default Product;

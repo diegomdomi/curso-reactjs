@@ -1,20 +1,22 @@
 import React, {useState} from 'react'
 import './store.css'
 import Product from './Product'
+import ModalFunc from './ModalFunc'
 
 const Store = ({products}) => {
-
 console.log("soy Store");
-const [currency, setcurrency] = useState(false)
 
-const cambiar=()=>{
-  setcurrency(!currency)
+const [modal,setModal] = useState(false)
+
+const changeState = () => {
+  setModal(!modal)
 }
-console.log(currency)
+console.log(modal);
+
 
   return (
    <>
-    <button  onClick={cambiar}>{currency ? "u$s" : "€"}</button>
+
     <div className="container">
       <div className="row">
        {products.map((item, index) => {
@@ -30,6 +32,8 @@ console.log(currency)
         })}
       </div>
     </div> 
+    
+    <ModalFunc changeState={changeState}/>
     </>
 
   )

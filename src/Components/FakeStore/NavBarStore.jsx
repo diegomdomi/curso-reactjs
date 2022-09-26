@@ -39,7 +39,7 @@ const userLoged= userRegister.users.email
               {theme==="light" ? (<div><FontAwesomeIcon icon={faMoon}/></div>): (<div><FontAwesomeIcon icon={faSun}/></div>)}
             </button>
             </li>
-            <li className="right hide-on-med-and-down">Hello!,{userLoged}</li>
+            <li className="right hide-on-med-and-down">Hello! {userLoged}</li>
           </ul>
         </div>
       </nav>
